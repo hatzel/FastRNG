@@ -87,9 +87,15 @@ class Random {
     }
 
     convenience init() {
-        var t = timespec()
-        clock_gettime(CLOCK_REALTIME, &t)
-        self.init(seed: UInt64(t.tv_sec) + UInt64(t.tv_nsec))
+        #if os(Linux)
+            var t = timespec()
+            clock_gettime(CLOCK_REALTIME, &t)
+            self.init(seed: UInt64(t.tv_sec) + UInt64(t.tv_nsec))
+        #else
+            let r1 = UInt64(arc4random())
+            let r2 = UInt64(arc4random())
+            self.init(seed: r1 &+ r2)
+        #endif
     }
 
     func next() -> UInt64 {
