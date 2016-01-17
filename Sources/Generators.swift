@@ -1,7 +1,7 @@
 // this file contains implementations of the algorithms described
 // and implemented (in c) on http://xorshift.di.unimi.it/
 
-final class SplitMix64Generator: RandomGenerator {
+public final class SplitMix64Generator: RandomGenerator {
     private var state: UInt64
     
     init(seed: UInt64) {
@@ -17,7 +17,7 @@ final class SplitMix64Generator: RandomGenerator {
     }
 }
 
-final class Xorshift128PlusGenerator: RandomGenerator {
+public final class Xorshift128PlusGenerator: RandomGenerator {
     private let state = UnsafeMutablePointer<UInt64>.alloc(2)
     
     init(seed: (UInt64, UInt64)) {
@@ -46,7 +46,7 @@ final class Xorshift128PlusGenerator: RandomGenerator {
     }
 }
 
-final class Xorshift1024StarGenerator: RandomGenerator {
+public final class Xorshift1024StarGenerator: RandomGenerator {
     private let state = UnsafeMutablePointer<UInt64>.alloc(16)
     private var p: Int = 0
     
