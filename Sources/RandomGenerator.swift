@@ -1,4 +1,4 @@
-protocol RandomGenerator {
+public protocol RandomGenerator {
     init(seed: UInt64)
     func next() -> UInt64
 }
@@ -10,7 +10,7 @@ protocol RandomGenerator {
 #endif
 
 extension RandomGenerator {
-    init() {
+    public init() {
         #if os(Linux)
             var t = timespec()
             clock_gettime(CLOCK_REALTIME, &t)
@@ -22,7 +22,7 @@ extension RandomGenerator {
         #endif
     }
     
-    func sample<C where C: CollectionType, C.Index.Distance == Int>(collection: C) -> C.Generator.Element {
+    public func sample<C where C: CollectionType, C.Index.Distance == Int>(collection: C) -> C.Generator.Element {
         let num = UInt64(collection.count)
         let excess = (UInt64.max % num) + 1
         let max = UInt64.max - excess
@@ -39,7 +39,7 @@ extension RandomGenerator {
         return collection[index]
     }
     
-    func randomDouble() -> Double {
+    public func randomDouble() -> Double {
         let max = UInt64.max
         return Double(next()) / Double(max)
     }

@@ -1,3 +1,3 @@
-class FastRNG {
-    static var defaultGenerator: RandomGenerator = Xorshift1024StarGenerator()
+public class FastRNG {
+    public static var defaultGenerator: RandomGenerator = Xorshift1024StarGenerator()
 }
